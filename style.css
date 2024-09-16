@@ -1,0 +1,228 @@
+
+body{
+/* UI Properties */
+background: #F6F7F8 0% 0% no-repeat padding-box;
+opacity: 1;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    background-color: rgb(197, 248, 197);
+}
+nav ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+nav ul li {
+    margin-right: 20px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    font-weight: 500;
+}
+.active {
+    background-color: #01F0D0;
+    border-radius: 20px;
+    padding: 6px 14px;
+}
+.login{
+    font-size: 11px;
+    font-weight: 500;
+}
+.main-content {
+    display: flex;
+    gap: 20px;
+}
+.patient-list {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+}
+.patients-list {
+    height: 700px;
+    overflow: auto;
+}
+.patient-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.patient-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.diagnosis-history {
+    flex: 2.5;
+    /* background-color: white;
+    padding: 20px;
+    border-radius: 10px; */
+}
+.chart-info{
+    padding: 16px;
+    border-radius: 10px;
+    background-color: white;
+}
+.chart {
+    width: 100%;
+    height: 300px;
+    background-color: #F4F0FE ;
+    margin-bottom: 20px;
+}
+.dignos-list{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.vitals {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+}
+.vital-item {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+}
+.vital-item-level{
+    font-size: 10px;
+}
+.respiratory {
+    background-color: #e6f7ff;
+}
+.temperature {
+    background-color: #fff1f0;
+}
+.heart-rate {
+    background-color: #fff2e8;
+}
+.patient-info-main{
+    flex: 1;
+    width: 100%;
+}
+.patient-info {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    height: 540px;
+}
+.lab-result{
+    background-color: white;
+    padding: 12px;
+    border-radius: 10px;
+    width: 100%;
+
+}
+.lab-result-list{
+    height: 120px;
+    overflow: auto;
+}
+.navigation{
+    top: 18px;
+    left: 18px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 70px;
+    opacity: 1;
+}
+.logo{
+    width: 10%;
+    background: transparent url('img/TestLogo.png') 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+.navigation svg{
+    height: 100%;
+    width: 100%;
+}
+.nav-tabs{
+
+}
+.login{
+
+}
+.showall{
+    background: #01F0D0;
+    border-radius: 41px;
+    opacity: 1;
+    width: max-content;
+}
+/* dignos list  */
+.diagnostic-list {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.diagnostic-list h2 {
+    background-color: white;
+    margin: 0;
+    padding: 15px 0px;
+    font-size: 17px;
+    color: #333;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    outline: none;
+}
+thead{
+    font-size: 12px;
+}
+tbody{
+    display: block;
+    font-size: 12px;
+    height: 200px;
+    overflow: auto;
+}
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;/* even columns width , fix width of table too*/
+}
+thead {
+    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+th, td {
+    text-align: left;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    color: #555;
+    border: none;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+  
+::-webkit-scrollbar {
+    width: 4px; 
+    border-radius: 50px;
+    overflow: hidden; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333334; 
+    border-radius: 50px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 50px; 
+
+}
