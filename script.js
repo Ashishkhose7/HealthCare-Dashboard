@@ -54,8 +54,8 @@ const renderList = (userList, index) => {
     const listItems = userList.map((item,index) => `
         <li class="flex items-center justify-between mb-2 cursor-pointer ${index==currUserIndex ? 'bg-[#D8FCF7]':'hover:bg-slate-100'} py-3 px-3" onclick="changeUser(${index})">
                            <div class="patient-info1 flex items-center gap-1">
-                                <img class="mr-1" src="${item.profile_picture}" alt="" style="height: 30px; width: 30px;">
-                                <div style="font-size: 10px;" class=" font-semibold">${item.name}<br><span class="font-normal text-slate-500">${item.gender}, ${item.age}</span></div>
+                                <img class="mr-1" src="${item.profile_picture}" alt="" style="height: 35px; width: 35px;">
+                                <div style="font-size: 13px;" class=" font-semibold">${item.name}<br><span class="font-normal text-slate-500">${item.gender}, ${item.age}</span></div>
                            </div>
                            <div class="more">
                             <img src="./img//more_horiz_FILL0_wght300_GRAD0_opsz24.png" alt="" width="14">
@@ -91,7 +91,7 @@ const userProfile = (userList) =>{
 //Render lab result 
 const renderlabList = (userList, index) => {
     const listItems = userList[currUserIndex].lab_results.map(result => `
-        <div class="flex justify-between p-1 mb-2 hover:bg-slate-100 cursor-pointer text-xs text-slate-500">
+        <div class="flex justify-between p-1 mb-2 hover:bg-slate-100 cursor-pointer text-slate-500">
             <span>${result}</span>
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20">
@@ -197,14 +197,17 @@ const chart = (dataObjects, systoliclevels, diastoliclevels, isdistroy) => {
                         beginAtZero: true,
                         ticks: {
                         font: {
-                            size: 10
+                            size: 12
                         }
                     }
                     },
                     x: {
+                        grid:{
+                            display: false
+                        },
                         ticks: {
                         font: {
-                            size: 10
+                            size: 12
                         }
                 }
             }
