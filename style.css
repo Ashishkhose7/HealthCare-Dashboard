@@ -1,6 +1,7 @@
 body{
-background: #F6F7F8 0% 0% no-repeat padding-box;
-opacity: 1;
+    background: #F6F7F8;
+    opacity: 1;
+    font-size: 16px;
 }
 
 .logo {
@@ -20,7 +21,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #333;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
 }
 .active {
