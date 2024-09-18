@@ -1,9 +1,8 @@
-
 body{
-/* UI Properties */
 background: #F6F7F8 0% 0% no-repeat padding-box;
 opacity: 1;
 }
+
 .logo {
     font-size: 24px;
     font-weight: bold;
@@ -59,9 +58,6 @@ nav ul li a {
 }
 .diagnosis-history {
     flex: 2.5;
-    /* background-color: white;
-    padding: 20px;
-    border-radius: 10px; */
 }
 .chart-info{
     padding: 16px;
@@ -121,7 +117,7 @@ nav ul li a {
 
 }
 .lab-result-list{
-    height: 120px;
+    height: 130px;
     overflow: auto;
 }
 .navigation{
@@ -141,19 +137,12 @@ nav ul li a {
     height: 100%;
     width: 100%;
 }
-.nav-tabs{
-
-}
-.login{
-
-}
 .showall{
     background: #01F0D0;
     border-radius: 41px;
     opacity: 1;
     width: max-content;
 }
-/* dignos list  */
 .diagnostic-list {
     background-color: white;
     border-radius: 8px;
@@ -179,16 +168,17 @@ thead{
 tbody{
     display: block;
     font-size: 12px;
-    height: 200px;
+    height: 150px;
     overflow: auto;
 }
 thead, tbody tr {
     display: table;
     width: 100%;
-    table-layout: fixed;/* even columns width , fix width of table too*/
+    table-layout: fixed;
+    font-size: 10px;
 }
 thead {
-    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+    width: calc( 100% - 1em )
 }
 th, td {
     text-align: left;

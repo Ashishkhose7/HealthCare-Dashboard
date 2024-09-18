@@ -4,7 +4,10 @@ let auth = btoa(`${username}:${password}`);
 let headers = {
     'Authorization': `Basic ${auth}`
 }
-let userList = [];
+let currUserIndex = 3; 
+let userList;
+let myChart;
+// Fetching Users Data
 const fetchData = async () => {
     const url = 'https://fedskillstest.coalitiontechnologies.workers.dev';
     
@@ -17,7 +20,7 @@ const fetchData = async () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        
+        userList = data
         if(data){
             renderList(data);
             userProfile(data);
@@ -27,7 +30,6 @@ const fetchData = async () => {
             chartData(data);
         }
 
-        // console.log(data);
     } catch (error) {
         console.error('Error fetching data:', error);
     }
@@ -35,10 +37,22 @@ const fetchData = async () => {
 
 fetchData();
 
+const changeUser = (index) => {
+    currUserIndex = index;
+    userProfile(userList);
+    renderlabList(userList);
+    diagnosticList(userList);
+    vitalsDiagnosisHistory(userList);
+    myChart.destroy();  
+    chartData(userList)
+    renderList(userList);
+    
+}
+
 // Render List of users
-function renderList(userList, index) {
+const renderList = (userList, index) => {
     const listItems = userList.map((item,index) => `
-        <li class="flex items-center justify-between mb-2 cursor-pointer ${index==3 ? 'bg-[#D8FCF7]':''} py-3 px-3">
+        <li class="flex items-center justify-between mb-2 cursor-pointer ${index==currUserIndex ? 'bg-[#D8FCF7]':'hover:bg-slate-100'} py-3 px-3" onclick="changeUser(${index})">
                            <div class="patient-info1 flex items-center gap-1">
                                 <img class="mr-1" src="${item.profile_picture}" alt="" style="height: 30px; width: 30px;">
                                 <div style="font-size: 10px;" class=" font-semibold">${item.name}<br><span class="font-normal text-slate-500">${item.gender}, ${item.age}</span></div>
@@ -54,29 +68,29 @@ function renderList(userList, index) {
 
 // Render User Profile
 const userProfile = (userList) =>{
-    const date = new Date(userList[3].date_of_birth);
+    const date = new Date(userList[currUserIndex].date_of_birth);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = date.toLocaleDateString('en-US', options);
-    
+
     let dob = document.querySelector('.dob').innerHTML = formattedDate;
 
-   let userprofile =  document.querySelector('.patient-info img');
-   userprofile.src = userList[3].profile_picture;
+    let userprofile =  document.querySelector('.patient-info img');
+    userprofile.src = userList[currUserIndex].profile_picture;
 
-   let username = document.querySelector('.patient-info h2').innerHTML = userList[3].name;
+    let username = document.querySelector('.patient-info h2').innerHTML = userList[currUserIndex].name;
 
-   let gender = document.querySelector('.gender').innerHTML = userList[3].gender;
-   
-   let phone = document.querySelector('.contact').innerHTML = userList[3].phone_number;
-  
-   let ephone = document.querySelector('.econtact').innerHTML = userList[3].emergency_contact;
-   
-   let insurancepro = document.querySelector('.insurancepro').innerHTML = userList[3].insurance_type;
+    let gender = document.querySelector('.gender').innerHTML = userList[currUserIndex].gender;
+
+    let phone = document.querySelector('.contact').innerHTML = userList[currUserIndex].phone_number;
+
+    let ephone = document.querySelector('.econtact').innerHTML = userList[currUserIndex].emergency_contact;
+
+    let insurancepro = document.querySelector('.insurancepro').innerHTML = userList[currUserIndex].insurance_type;
 }
 
 //Render lab result 
 const renderlabList = (userList, index) => {
-    const listItems = userList[3].lab_results.map(result => `
+    const listItems = userList[currUserIndex].lab_results.map(result => `
         <div class="flex justify-between p-1 mb-2 hover:bg-slate-100 cursor-pointer text-xs text-slate-500">
             <span>${result}</span>
             <span>
@@ -91,7 +105,7 @@ const renderlabList = (userList, index) => {
 
 // Render diagnostic_list
 const diagnosticList = (userList) => {
-    const listItems = userList[3].diagnostic_list.map(result => `
+    const listItems = userList[currUserIndex].diagnostic_list.map(result => `
          <tr>
             <td>${result.name}</td>
             <td>${result.description}</td>
@@ -102,9 +116,8 @@ const diagnosticList = (userList) => {
 }
 
 // Render vitals diagnosis_history
-
 const vitalsDiagnosisHistory = (userList) => {
-    const vitals = userList[3].diagnosis_history[0]
+    const vitals = userList[currUserIndex].diagnosis_history[0]
 
     document.querySelector('.resrate').innerHTML =  `${vitals.respiratory_rate.value} bpm`;
     document.querySelector('.reslevel').innerHTML =  vitals.respiratory_rate.levels;
@@ -125,7 +138,7 @@ const chartData = (userList) => {
     let systoliclevels = [];
     let diastoliclevels = [];
 
-    let history = userList[3].diagnosis_history
+    let history = userList[currUserIndex].diagnosis_history
     
 
     for (const key in history) {
@@ -133,20 +146,20 @@ const chartData = (userList) => {
         dataObjects.push(obj);
         systoliclevels.push(history[key].blood_pressure.systolic.value);
         diastoliclevels.push(history[key].blood_pressure.diastolic.value);
-        
     }
     
     chart(dataObjects.slice(0,6).reverse(), systoliclevels.slice(0,6).reverse(), diastoliclevels.slice(0,6).reverse());
     
 }
 
-const chart = (dataObjects, systoliclevels, diastoliclevels) => {
+
+// Render Chart Data
+const chart = (dataObjects, systoliclevels, diastoliclevels, isdistroy) => {
     
     const ctx = document.getElementById('myChart').getContext('2d');  
     const labels = dataObjects.map(obj => `${obj.month} ${obj.year}`);
 
-
-        const myChart = new Chart(ctx, {
+         myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels:labels,
@@ -198,4 +211,5 @@ const chart = (dataObjects, systoliclevels, diastoliclevels) => {
                 }
             }
         });
+
 }
